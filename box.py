@@ -2,10 +2,22 @@ import pygame
 import configs
 
 class Box:
-    def __init__(self, x, y):
+    def __init__(self, x):
         self.__x = x
-        self.__y = y
+        self.__y = 445
         self.__img = configs.Img.BOX
+
+    def get_x(self):
+        return self.__x
+
+    def set_x(self, value):
+        self.__x = value
+
+    def get_y(self):
+        return self.__y
+
+    def set_y(self, value):
+        self.__y = value
 
     def draw(self, surface):
         surface.blit(self.__img, [self.__x, self.__y])

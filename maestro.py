@@ -4,7 +4,7 @@ import configs
 class Maestro:
     def __init__(self):
         self.__x = 100
-        self.__y = 180
+        self.__y = 380
         self.__speed = 5
         self.__state = None
         self.__img = configs.Img.MAESTRO
@@ -28,12 +28,12 @@ class Maestro:
 
         if self.__state == "jump":
             self.__y -= self.__speed
-            if self.__y <= 100:
+            if self.__y <= 280:
                 self.__state = "fall"
 
         if self.__state == "fall":
             self.__y += self.__speed
-            if self.__y >= 180:
+            if self.__y >= 380:
                 self.__state = None
 
 

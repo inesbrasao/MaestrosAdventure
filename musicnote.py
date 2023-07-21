@@ -6,9 +6,22 @@ class MusicNote:
     def __init__(self, name):
         self.__name = name
         self.__x = random.randint(220, 1030)
-        self.__y = random.randint(100, 180)
+        self.__y = random.randint(170, 330)
         self.__img = configs.Img.MUSIC_NOTE[name]
         self.__sound = configs.Sound.MUSIC_NOTE[name]
+
+    def get_x(self):
+        return self.__x
+
+    def set_x(self, value):
+        self.__x = value
+
+    def get_y(self):
+        return self.__y
+
+    def set_y(self, value):
+        self.__y = value
+
 
     def draw(self, surface):
         surface.blit(self.__img, [self.__x, self.__y])

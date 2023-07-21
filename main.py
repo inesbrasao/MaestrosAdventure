@@ -1,6 +1,7 @@
 import pygame
 from configs import *
 from maestro import Maestro
+from platformmanager import PlatformManager
 from sheetmanager import SheetManager
 
 pygame.init()
@@ -12,6 +13,8 @@ pygame.display.set_icon(Window.ICON)
 maestro = Maestro()
 sheet_manager = SheetManager()
 sheet_manager.generate_melody(["DO", "DO", "SOL", "SOL", "LA", "LA", "SOL"])
+platform_manager = PlatformManager()
+platform_manager.generate_boxes(sheet_manager.get_music_notes())
 clock = pygame.time.Clock()
 run = True
 
@@ -35,8 +38,10 @@ while run:
 
     maestro.jumping()
     maestro.draw(screen)
+    platform_manager.draw_all(screen)
     sheet_manager.play_sound(maestro)
     sheet_manager.draw_all(screen)
+    sheet_manager.draw_melody(screen)
 
     pygame.display.update()
 

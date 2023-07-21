@@ -4,7 +4,7 @@ pygame.init()
 
 class Window:
     WIDTH = 1300
-    HEIGHT = 371
+    HEIGHT = 700
     TITLE = "Maestro's Adventure"
     ICON = pygame.image.load("imgs/icon.png")
 
