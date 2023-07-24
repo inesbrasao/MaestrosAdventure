@@ -42,6 +42,7 @@ while run:
     sheet_manager.play_sound(maestro)
     sheet_manager.draw_all(screen)
     sheet_manager.draw_melody(screen)
+    platform_manager.box_collides_with(maestro)
 
     pygame.display.update()
 

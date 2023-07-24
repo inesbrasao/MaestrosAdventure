@@ -6,7 +6,7 @@ class MusicNote:
     def __init__(self, name):
         self.__name = name
         self.__x = random.randint(220, 1030)
-        self.__y = random.randint(170, 330)
+        self.__y = random.randint(170, 300)
         self.__img = configs.Img.MUSIC_NOTE[name]
         self.__sound = configs.Sound.MUSIC_NOTE[name]
 
@@ -38,5 +38,5 @@ class MusicNote:
 
     # Verificar colisão
 
-    def colides_with(self, who):
+    def collides_with(self, who):
         return who.get_overlaping_area(self.__img, self.__x, self.__y) > 0

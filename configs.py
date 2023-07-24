@@ -15,7 +15,7 @@ class Img:
     LIGHT = pygame.image.load("imgs/enemy.png")
     BOX = pygame.image.load("imgs/box.png")
     MUSIC_NOTE = {
-        "DO": pygame.image.load("imgs/BLUEnote.png"),
+        "DO": pygame.image.load("imgs/ORANGEnote.png"),
         "RE": pygame.image.load("imgs/PINKnote.png"),
         "MI": pygame.image.load("imgs/BBLUEnote.png"),
         "FA": pygame.image.load("imgs/GREENnote.png"),
@@ -32,4 +32,5 @@ class Sound:
         "SOL": pygame.mixer.Sound("sounds/sol.ogg"),
         "LA": pygame.mixer.Sound("sounds/la.ogg"),
     }
+    BOP = pygame.mixer.Sound("sounds/bop.ogg")
 

@@ -20,8 +20,8 @@ class SheetManager:
         count = 0
         for note in self.__melody:
             count += 2
-            note.set_x(30 * count)
-            note.set_y(630)
+            note.set_x(20 * count)
+            note.set_y(610)
             note.draw(surface)
 
 
@@ -30,9 +30,16 @@ class SheetManager:
             note.draw(surface)
 
     def play_sound(self, maestro):
-        for note in self.__music_notes:
-            if maestro.colides_with(note):
+        for index, note in enumerate(self.__music_notes):
+            if index == 0 and maestro.collides_with(note):
                 note.play_sound()
+                self.__music_notes.remove(note)
+            elif index > 0 and maestro.collides_with(note):
+                configs.Sound.BOP.play()
+
+
+
+
 
 
 

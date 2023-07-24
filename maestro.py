@@ -6,8 +6,33 @@ class Maestro:
         self.__x = 100
         self.__y = 380
         self.__speed = 5
-        self.__state = None
+        self.__jumping_state = None
+        self.__on_platform = False
         self.__img = configs.Img.MAESTRO
+
+    def get_x(self):
+        return self.__x
+
+    def set_x(self, value):
+        self.__x = value
+
+    def get_y(self):
+        return self.__y
+
+    def set_y(self, value):
+        self.__y = value
+
+    def get_on_platform(self):
+        return self.__on_platform
+
+    def set_on_platform(self, value):
+        self.__on_platform = value
+
+    def get_jumping_state(self):
+        return self.__jumping_state
+
+    def set_jumping_state(self, value):
+        self.__jumping_state = value
 
     def draw(self, surface):
         surface.blit(self.__img, [self.__x, self.__y])
@@ -23,22 +48,32 @@ class Maestro:
         self.limit_boundaries()
 
     def jumping(self):
-        if self.__state is None:
+        if self.__jumping_state is None:
             return
 
-        if self.__state == "jump":
-            self.__y -= self.__speed
-            if self.__y <= 280:
-                self.__state = "fall"
+        if self.__jumping_state == "jump":
+            if self.__on_platform:
+                self.__y -= self.__speed
+                if self.__y <= 220:
+                    self.__jumping_state = "fall"
+            else:
+                self.__y -= self.__speed
+                if self.__y <= 280:
+                    self.__jumping_state = "fall"
 
-        if self.__state == "fall":
-            self.__y += self.__speed
-            if self.__y >= 380:
-                self.__state = None
+        if self.__jumping_state == "fall":
+            if self.__on_platform:
+                self.__y += self.__speed
+                if self.__y >= 320:
+                    self.__jumping_state = None
+            else:
+                self.__y += self.__speed
+                if self.__y >= 380:
+                    self.__jumping_state = None
 
 
     def jump(self):
-        self.__state = "jump"
+        self.__jumping_state = "jump"
 
     def limit_boundaries(self):
         if self.__x < 100:
@@ -54,5 +89,8 @@ class Maestro:
 
     # Verificar colisão
 
-    def colides_with(self, who):
+    def collides_with(self, who):
         return who.get_overlaping_area(self.__img, self.__x, self.__y) > 0
+
+
+

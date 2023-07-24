@@ -4,7 +4,7 @@ import configs
 class Box:
     def __init__(self, x):
         self.__x = x
-        self.__y = 445
+        self.__y = 450
         self.__img = configs.Img.BOX
 
     def get_x(self):
@@ -31,5 +31,5 @@ class Box:
 
     # Verificar colisão
 
-    def colides_with(self, who):
+    def collides_with(self, who):
         return who.get_overlaping_area(self.__img, self.__x, self.__y) > 0
