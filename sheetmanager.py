@@ -25,18 +25,20 @@ class SheetManager:
         return self.__music_notes
 
     def generate_melody(self, list_of_notes):
+        count = 0
         for note in list_of_notes:
+            count += 2
             for place in self.__grid:
-                self.__music_notes.append(MusicNote(note))
-                self.__melody.append(MusicNote(note))
+                self.__music_notes.append(MusicNote(note, place[0], place[1]))
+                self.__melody.append(MusicNote(note, 20 * count, 610))
 
-    def draw_melody(self, surface):
+    """def draw_melody(self, surface):
         count = 0
         for note in self.__melody:
             count += 2
             note.set_x(20 * count)
             note.set_y(610)
-            note.draw(surface)
+            note.draw(surface)"""
 
     def draw_all(self, surface):
         for note in self.__music_notes:
