@@ -43,6 +43,8 @@ class SheetManager:
     def draw_all(self, surface):
         for note in self.__music_notes:
             note.draw(surface)
+        for note in self.__melody:
+            note.draw(surface)
 
     def play_sound(self, maestro):
         for index, note in enumerate(self.__music_notes):
