@@ -1,9 +1,22 @@
 import configs
 import math
 from musicnote import MusicNote
+from random import randint
 
 class SheetManager:
     def __init__(self):
+        self.__grid = [
+            [100, randint(220, 370)], 
+            [200, randint(220, 370)],
+            [300, randint(220, 370)],
+            [400, randint(220, 370)],
+            [500, randint(220, 370)],
+            [600, randint(220, 370)],
+            [700, randint(220, 370)],
+            [800, randint(220, 370)],
+            [900, randint(220, 370)],
+            [1000, randint(220, 370)],
+        ]
         self.__music_notes = []
         self.__melody = []
         self.__score = 0
@@ -13,8 +26,9 @@ class SheetManager:
 
     def generate_melody(self, list_of_notes):
         for note in list_of_notes:
-            self.__music_notes.append(MusicNote(note))
-            self.__melody.append(MusicNote(note))
+            for place in self.__grid:
+                self.__music_notes.append(MusicNote(note))
+                self.__melody.append(MusicNote(note))
 
     def draw_melody(self, surface):
         count = 0
