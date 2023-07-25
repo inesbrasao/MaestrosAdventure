@@ -22,6 +22,12 @@ class MusicNote:
     def set_y(self, value):
         self.__y = value
 
+    def get_name(self):
+        return self.__name
+
+    def set_name(self, value):
+        self.__name = value
+
 
     def draw(self, surface):
         surface.blit(self.__img, [self.__x, self.__y])

@@ -8,6 +8,7 @@ class Maestro:
         self.__speed = 5
         self.__jumping_state = None
         self.__on_platform = False
+        self.__frame_count = 0
         self.__img = configs.Img.MAESTRO
 
     def get_x(self):
@@ -48,28 +49,28 @@ class Maestro:
         self.limit_boundaries()
 
     def jumping(self):
+        #PROBLEMA!!!! Fazer o salto em cima da plataforma.
         if self.__jumping_state is None:
             return
 
         if self.__jumping_state == "jump":
-            if self.__on_platform:
-                self.__y -= self.__speed
-                if self.__y <= 220:
-                    self.__jumping_state = "fall"
-            else:
-                self.__y -= self.__speed
-                if self.__y <= 280:
-                    self.__jumping_state = "fall"
+            self.__frame_count +=1
+            print(self.__frame_count)
+            self.__y -= self.__speed
+            if self.__frame_count >= 20:
+                self.__jumping_state = "fall"
 
-        if self.__jumping_state == "fall":
-            if self.__on_platform:
-                self.__y += self.__speed
-                if self.__y >= 320:
-                    self.__jumping_state = None
-            else:
-                self.__y += self.__speed
-                if self.__y >= 380:
-                    self.__jumping_state = None
+        if self.__jumping_state == "fall" and self.__on_platform:
+            self.__y += self.__speed
+            self.__frame_count -= 1
+            if self.__frame_count <= 0:
+                self.__frame_count = 0
+                self.__jumping_state = None
+        elif self.__jumping_state == "fall":
+            self.__y += self.__speed
+            if self.__y >=380:
+                self.__jumping_state = None
+                self.__frame_count = 0
 
 
     def jump(self):

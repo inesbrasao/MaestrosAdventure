@@ -24,13 +24,13 @@ class SheetManager:
             note.set_y(610)
             note.draw(surface)
 
-
     def draw_all(self, surface):
         for note in self.__music_notes:
             note.draw(surface)
 
     def play_sound(self, maestro):
         for index, note in enumerate(self.__music_notes):
+            #PROBLEMA!!! ou nome da nota == ao nome da nota do index 0 ????
             if index == 0 and maestro.collides_with(note):
                 note.play_sound()
                 self.__music_notes.remove(note)

@@ -3,6 +3,7 @@ from configs import *
 from maestro import Maestro
 from platformmanager import PlatformManager
 from sheetmanager import SheetManager
+from enemymanager import EnemyManager
 
 pygame.init()
 
@@ -11,6 +12,7 @@ pygame.display.set_caption(Window.TITLE)
 pygame.display.set_icon(Window.ICON)
 
 maestro = Maestro()
+enemy_manager = EnemyManager()
 sheet_manager = SheetManager()
 sheet_manager.generate_melody(["DO", "DO", "SOL", "SOL", "LA", "LA", "SOL"])
 platform_manager = PlatformManager()
@@ -42,6 +44,9 @@ while run:
     sheet_manager.play_sound(maestro)
     sheet_manager.draw_all(screen)
     sheet_manager.draw_melody(screen)
+    enemy_manager.generate_enemy()
+    enemy_manager.draw_all(screen)
+    enemy_manager.erase_enemy(maestro)
     platform_manager.box_collides_with(maestro)
 
     pygame.display.update()
