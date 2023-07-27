@@ -1,20 +1,30 @@
+import random
+
 import configs
-import math
 from musicnote import MusicNote
+
 
 class SheetManager:
     def __init__(self):
         self.__music_notes = []
         self.__melody = []
-        self.__score = 0
 
     def get_music_notes(self):
         return self.__music_notes
 
+    def get_melody(self):
+        return self.__melody
+
     def generate_melody(self, list_of_notes):
+        x = 220
         for note in list_of_notes:
-            self.__music_notes.append(MusicNote(note))
-            self.__melody.append(MusicNote(note))
+            self.__melody.append(MusicNote(note, 0))
+
+        random.shuffle(list_of_notes)
+        for note in list_of_notes:
+            self.__music_notes.append(MusicNote(note, x))
+            x += 125
+
 
     def draw_melody(self, surface):
         count = 0
@@ -27,15 +37,6 @@ class SheetManager:
     def draw_all(self, surface):
         for note in self.__music_notes:
             note.draw(surface)
-
-    def play_sound(self, maestro):
-        for index, note in enumerate(self.__music_notes):
-            #PROBLEMA!!! ou nome da nota == ao nome da nota do index 0 ????
-            if index == 0 and maestro.collides_with(note):
-                note.play_sound()
-                self.__music_notes.remove(note)
-            elif index > 0 and maestro.collides_with(note):
-                configs.Sound.BOP.play()
 
 
 

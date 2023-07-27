@@ -23,7 +23,7 @@ class EnemyManager:
         for enemy in self.__list_of_enemies:
             if enemy.collides_with(maestro):
                 self.__list_of_enemies.remove(enemy)
-            elif enemy.get_y() > (configs.Window.HEIGHT + 50):
+            elif enemy.get_y() > 570:
                 self.__list_of_enemies.remove(enemy)
 
 

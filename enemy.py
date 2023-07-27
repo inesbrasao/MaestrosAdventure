@@ -2,6 +2,7 @@ import configs
 import random
 import pygame
 
+
 class Light:
     def __init__(self):
         self.__x = random.randint(200, 1000)
@@ -18,6 +19,7 @@ class Light:
 
     def move(self):
         self.__y += self.__speed
+
     def get_overlaping_area(self, image, offset_x, offset_y):
         self_mask = pygame.mask.from_surface(self.__img)
         who_mask = pygame.mask.from_surface(image)

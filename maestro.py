@@ -1,6 +1,7 @@
 import pygame
 import configs
 
+
 class Maestro:
     def __init__(self):
         self.__x = 100
@@ -35,6 +36,12 @@ class Maestro:
     def set_jumping_state(self, value):
         self.__jumping_state = value
 
+    def get_frame_count(self):
+        return self.__frame_count
+
+    def set_frame_count(self, value):
+        self.__frame_count = value
+
     def draw(self, surface):
         surface.blit(self.__img, [self.__x, self.__y])
 
@@ -49,29 +56,34 @@ class Maestro:
         self.limit_boundaries()
 
     def jumping(self):
-        #PROBLEMA!!!! Fazer o salto em cima da plataforma.
         if self.__jumping_state is None:
             return
 
         if self.__jumping_state == "jump":
-            self.__frame_count +=1
+            self.__frame_count += 1
             print(self.__frame_count)
             self.__y -= self.__speed
             if self.__frame_count >= 20:
                 self.__jumping_state = "fall"
 
-        if self.__jumping_state == "fall" and self.__on_platform:
-            self.__y += self.__speed
-            self.__frame_count -= 1
-            if self.__frame_count <= 0:
-                self.__frame_count = 0
-                self.__jumping_state = None
-        elif self.__jumping_state == "fall":
-            self.__y += self.__speed
-            if self.__y >=380:
-                self.__jumping_state = None
-                self.__frame_count = 0
+    def push_down(self, list_of_boxes):
+        if self.__jumping_state == "jump":
+            return
 
+        print(self.__on_platform)
+
+        self.__y += self.__speed
+        for box in list_of_boxes:
+            if self.collides_with(box):
+                self.__y = 320
+                self.__jumping_state = None
+                self.__on_platform = True
+                self.__frame_count = 0
+            elif self.__y >= 380:
+                self.__y = 380
+                self.__on_platform = False
+                self.__jumping_state = None
+                self.__frame_count = 0
 
     def jump(self):
         self.__jumping_state = "jump"
@@ -93,5 +105,12 @@ class Maestro:
     def collides_with(self, who):
         return who.get_overlaping_area(self.__img, self.__x, self.__y) > 0
 
-
+    def catch_note(self, list_of_notes, melody):
+        for note in list_of_notes:
+            if self.collides_with(note) and (note.get_name() == melody[0].get_name()):
+                note.play_sound()
+                list_of_notes.remove(note)
+                del melody[0]
+            elif self.collides_with(note) and (note.get_name() != melody[0].get_name()):
+                configs.Sound.BOP.play()
 

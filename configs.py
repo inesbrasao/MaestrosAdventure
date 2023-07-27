@@ -15,12 +15,12 @@ class Img:
     LIGHT = pygame.image.load("imgs/enemy.png")
     BOX = pygame.image.load("imgs/box.png")
     MUSIC_NOTE = {
-        "DO": pygame.image.load("imgs/ORANGEnote.png"),
+        "DO": pygame.image.load("imgs/ORANGEnote1.png"),
         "RE": pygame.image.load("imgs/PINKnote.png"),
         "MI": pygame.image.load("imgs/BBLUEnote.png"),
         "FA": pygame.image.load("imgs/GREENnote.png"),
-        "SOL": pygame.image.load("imgs/YELLOWnote.png"),
-        "LA": pygame.image.load("imgs/REDnote.png"),
+        "SOL": pygame.image.load("imgs/YELLOWnote1.png"),
+        "LA": pygame.image.load("imgs/REDnote1.png"),
     }
 
 class Sound:

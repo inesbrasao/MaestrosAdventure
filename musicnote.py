@@ -3,9 +3,9 @@ import pygame
 import configs
 
 class MusicNote:
-    def __init__(self, name):
+    def __init__(self, name, x):
         self.__name = name
-        self.__x = random.randint(220, 1030)
+        self.__x = x
         self.__y = random.randint(170, 300)
         self.__img = configs.Img.MUSIC_NOTE[name]
         self.__sound = configs.Sound.MUSIC_NOTE[name]

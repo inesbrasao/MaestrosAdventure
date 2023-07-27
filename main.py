@@ -38,16 +38,17 @@ while run:
     elif key[pygame.K_RIGHT]:
         maestro.move("right")
 
+    maestro.push_down(platform_manager.get_boxes())
     maestro.jumping()
     maestro.draw(screen)
     platform_manager.draw_all(screen)
-    sheet_manager.play_sound(maestro)
+    maestro.catch_note(sheet_manager.get_music_notes(), sheet_manager.get_melody())
     sheet_manager.draw_all(screen)
     sheet_manager.draw_melody(screen)
     enemy_manager.generate_enemy()
     enemy_manager.draw_all(screen)
     enemy_manager.erase_enemy(maestro)
-    platform_manager.box_collides_with(maestro)
+
 
     pygame.display.update()
 
