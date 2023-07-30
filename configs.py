@@ -9,7 +9,12 @@ class Window:
     ICON = pygame.image.load("imgs/icon.png")
 
 class Img:
+    START = pygame.image.load("imgs/start.png")
+    RESTART = pygame.image.load("imgs/restart.png")
+    QUIT = pygame.image.load("imgs/quit.png")
     BACKGROUND = pygame.image.load("imgs/background.png")
+    LIFE = pygame.image.load("imgs/treble.png")
+    NO_LIFE = pygame.image.load("imgs/blacktreble.png")
     MAESTRO = pygame.image.load("imgs/maestro.png")
     MAESTRO_LEFT = pygame.transform.flip(MAESTRO, True, False)
     LIGHT = pygame.image.load("imgs/enemy.png")
@@ -33,4 +38,7 @@ class Sound:
         "LA": pygame.mixer.Sound("sounds/la.ogg"),
     }
     BOP = pygame.mixer.Sound("sounds/bop.ogg")
+
+class Font:
+    KANIT_30 = pygame.font.Font("fonts/Kanit-Medium.ttf", 30)
 

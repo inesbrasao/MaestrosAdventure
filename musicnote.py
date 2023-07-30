@@ -2,6 +2,7 @@ import random
 import pygame
 import configs
 
+
 class MusicNote:
     def __init__(self, name, x):
         self.__name = name

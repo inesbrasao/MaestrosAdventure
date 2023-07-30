@@ -11,6 +11,9 @@ class Maestro:
         self.__on_platform = False
         self.__frame_count = 0
         self.__img = configs.Img.MAESTRO
+        self.__score = 0
+
+
 
     def get_x(self):
         return self.__x
@@ -45,6 +48,10 @@ class Maestro:
     def draw(self, surface):
         surface.blit(self.__img, [self.__x, self.__y])
 
+    def draw_score(self, surface):
+        text = configs.Font.KANIT_30.render(F"Score: {self.__score}", True, "white")
+        surface.blit(text, [1100, 625])
+
     def move(self, direction):
         if direction == "right":
             self.__x += self.__speed
@@ -61,7 +68,6 @@ class Maestro:
 
         if self.__jumping_state == "jump":
             self.__frame_count += 1
-            print(self.__frame_count)
             self.__y -= self.__speed
             if self.__frame_count >= 20:
                 self.__jumping_state = "fall"
@@ -70,20 +76,22 @@ class Maestro:
         if self.__jumping_state == "jump":
             return
 
-        print(self.__on_platform)
+        y = self.__y
 
         self.__y += self.__speed
+
+        if self.__y >= 380:
+            self.__y = y
+            self.__jumping_state = None
+            self.__frame_count = 0
+            return
+
         for box in list_of_boxes:
             if self.collides_with(box):
-                self.__y = 320
-                self.__jumping_state = None
-                self.__on_platform = True
-                self.__frame_count = 0
-            elif self.__y >= 380:
-                self.__y = 380
-                self.__on_platform = False
                 self.__jumping_state = None
                 self.__frame_count = 0
+                self.__y = box.get_y() - self.__img.get_height()
+                return
 
     def jump(self):
         self.__jumping_state = "jump"
@@ -109,8 +117,14 @@ class Maestro:
         for note in list_of_notes:
             if self.collides_with(note) and (note.get_name() == melody[0].get_name()):
                 note.play_sound()
+                self.__score += 1
                 list_of_notes.remove(note)
                 del melody[0]
             elif self.collides_with(note) and (note.get_name() != melody[0].get_name()):
                 configs.Sound.BOP.play()
 
+    def gets_hit_by(self, list_of_enemies):
+        for enemy in list_of_enemies:
+            if self.collides_with(enemy):
+                list_of_enemies.remove(enemy)
+                return True
