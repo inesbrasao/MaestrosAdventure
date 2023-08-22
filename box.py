@@ -19,8 +19,18 @@ class Box:
     def set_y(self, value):
         self.__y = value
 
+    def get_img(self):
+        return self.__img
+
+
     def draw(self, surface):
         surface.blit(self.__img, [self.__x, self.__y])
+
+    def move(self):
+        if self.__x <= 200:
+            self.__x += 5
+        elif self.__x >= 1000:
+            self.__x -= 5
 
 
     # Area de sobreposição

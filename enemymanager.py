@@ -10,14 +10,17 @@ class EnemyManager:
     def get_list_of_enemies(self):
         return self.__list_of_enemies
 
-    def generate_enemy(self):
+    def generate_enemy(self, round):
         self.__frame_count += 1
-        if self.__frame_count == 150:
+        if round == 1 and self.__frame_count >= 150:
+            self.__frame_count = 0
+            self.__list_of_enemies.append(Light())
+        elif round == 2 and self.__frame_count >= 100:
             self.__frame_count = 0
             self.__list_of_enemies.append(Light())
 
-    def draw_all(self, surface):
-        self.generate_enemy()
+    def draw_all(self, surface, round):
+        self.generate_enemy(round)
         for enemy in self.__list_of_enemies:
             enemy.draw(surface)
             enemy.move()

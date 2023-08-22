@@ -1,5 +1,6 @@
 import pygame
 import configs
+import random
 
 
 class Maestro:
@@ -13,8 +14,6 @@ class Maestro:
         self.__img = configs.Img.MAESTRO
         self.__score = 0
 
-
-
     def get_x(self):
         return self.__x
 
@@ -27,7 +26,7 @@ class Maestro:
     def set_y(self, value):
         self.__y = value
 
-    def get_on_platform(self):
+    def is_on_platform(self):
         return self.__on_platform
 
     def set_on_platform(self, value):
@@ -44,6 +43,12 @@ class Maestro:
 
     def set_frame_count(self, value):
         self.__frame_count = value
+
+    def get_score(self):
+        return self.__score
+
+    def set_score(self, value):
+        self.__score = value
 
     def draw(self, surface):
         surface.blit(self.__img, [self.__x, self.__y])
@@ -72,6 +77,7 @@ class Maestro:
             if self.__frame_count >= 20:
                 self.__jumping_state = "fall"
 
+
     def push_down(self, list_of_boxes):
         if self.__jumping_state == "jump":
             return
@@ -83,6 +89,7 @@ class Maestro:
         if self.__y >= 380:
             self.__y = y
             self.__jumping_state = None
+            self.__on_platform = False
             self.__frame_count = 0
             return
 
@@ -90,8 +97,15 @@ class Maestro:
             if self.collides_with(box):
                 self.__jumping_state = None
                 self.__frame_count = 0
-                self.__y = box.get_y() - self.__img.get_height()
-                return
+
+                if self.__x <= box.get_x() - 35:
+                    self.__x -= 10
+                elif self.__x >= box.get_x() + 35:
+                    self.__x += 10
+                else:
+                    self.__y = box.get_y() - self.__img.get_height()
+
+
 
     def jump(self):
         self.__jumping_state = "jump"
@@ -122,6 +136,7 @@ class Maestro:
                 del melody[0]
             elif self.collides_with(note) and (note.get_name() != melody[0].get_name()):
                 configs.Sound.BOP.play()
+
 
     def gets_hit_by(self, list_of_enemies):
         for enemy in list_of_enemies:

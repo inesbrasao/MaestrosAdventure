@@ -29,7 +29,6 @@ class MusicNote:
     def set_name(self, value):
         self.__name = value
 
-
     def draw(self, surface):
         surface.blit(self.__img, [self.__x, self.__y])
 
