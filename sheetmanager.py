@@ -1,4 +1,7 @@
 import random
+
+import pygame.time
+
 import configs
 from musicnote import MusicNote
 
@@ -8,12 +11,16 @@ class SheetManager:
         self.__music_notes = []
         self.__melody = []
         self.__music = []
+        self.__frames_count = 0
 
     def get_music_notes(self):
         return self.__music_notes
 
     def get_melody(self):
         return self.__melody
+
+    def get_music(self):
+        return self.__music
 
     def generate_melody(self, list_of_notes):
         x = 220
@@ -26,7 +33,6 @@ class SheetManager:
             self.__music_notes.append(MusicNote(note, x))
             x += 125
 
-
     def draw_melody(self, surface):
         count = 0
         for note in self.__melody:
@@ -38,6 +44,17 @@ class SheetManager:
     def draw_all(self, surface):
         for note in self.__music_notes:
             note.draw(surface)
+
+    def catch_all(self):
+        if len(self.__melody) <= 0:
+            return True
+
+    def play_melody(self):
+        for note in self.__music:
+            self.__frames_count += 1
+            if self.__frames_count >= 120:
+                note.play_sound()
+                self.__frames_count = 0
 
 
 
